@@ -16,10 +16,10 @@
 			              <input type="text" class="form-control" id="name" placeholder="First Name M.I. Last Name" v-model="name" required>
 			            </div>
 			            <div class="mb-3">
-			              <input type="email" class="form-control" id="email" placeholder="Email" v-model="email" required>
+			              <input type="email" class="form-control" id="email" placeholder="Email" v-model="email" required autocomplete="off">
 			            </div>
 			            <div class="mb-3">
-			              <textarea class="form-control" id="message" rows="5" placeholder="Message" v-model= "message" required></textarea>
+			              <textarea class="form-control" id="message" rows="5" placeholder="Message" v-model= "message" required autocomplete="off"></textarea>
 			            </div>
 			            <div class="d-flex justify-content-between align-items-center">
 			            	<div class="social-links">
