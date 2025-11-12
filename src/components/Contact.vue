@@ -11,7 +11,7 @@
 
 			        
 			        <div class="col-md-6">
-			          <form class="p-4 border rounded bg-white shadow-sm">
+			          <form class="p-4 border rounded bg-white shadow-sm" @submit.prevent="submitForm">
 			            <div class="mb-3">
 			              <input type="text" class="form-control" id="name" placeholder="First Name M.I. Last Name" required>
 			            </div>
