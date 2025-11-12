@@ -1,0 +1,105 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #765C3D;
+    background-color: #E2D2C9;
+}
+
+nav
+{
+  background: #5a5f73 !important;
+}
+
+nav a
+{
+  font-family: Montserrat;
+  font-weight: 500;
+  font-style: Medium;
+  font-size: 18px;
+  line-height: 100%;
+
+  color: #F2D2AE !important;
+}
+#logo img {
+    width: 60px;
+    height: 50px;
+    padding-left: 5px;
+}
+#landing {
+
+  background: #E2D2C9;
+}
+
+#landing-img-col {
+
+    max-width: 300px;
+    
+}
+
+ #landing-about-me {
+
+font-family: Montserrat;
+font-weight: 200;
+font-style: Regular;
+font-size: 14px;
+letter-spacing: 0%;
+text-align: center;
+
+
+ color: #765C3D !important;
+;
+
+ }
+
+ #projects {
+    background-color: #EEE0D2; 
+    padding: 60px 0;
+
+}
+
+.btn-custom {
+    border-radius: 50px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+#tools {
+
+    background: #E2D2C9 !important;
+    
+}
+
+.tool-img {
+    width: 80px;
+    height: 80px;
+}
+
+#contact {
+    align-content: center;
+    padding: 5px;
+}
+
+.map-frame {
+    width: 80%;
+    height: 350px;
+    border-radius: 2px;
+    padding-left: 20px;
+}
+
+.social-links img {
+    width: 30px;
+    height: 30px;
+
+}
+footer {
+
+    background: #5a5f73 !important;
+    color: #F2D2AE;
+    text-align: center;
+}
