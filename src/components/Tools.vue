@@ -11,7 +11,7 @@
               <div><img src="/images/html.png" class="img-fluid mx-auto"></div>
               <div><img src="/images/css.png" class="img-fluid mx-auto"></div>
               <div><img src="/images/bootstrap.png" class="img-fluid mx-auto"></div>
-              <div><img src="./images/js.png" class="img-fluid mx-auto"></div>
+              <div><img src="/images/js.png" class="img-fluid mx-auto"></div>
             </div>
           </div>
         </div>
