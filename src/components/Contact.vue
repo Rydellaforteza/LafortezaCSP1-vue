@@ -19,7 +19,7 @@
 			              <input type="email" class="form-control" id="email" placeholder="Email" v-model="email" required>
 			            </div>
 			            <div class="mb-3">
-			              <textarea class="form-control" id="message" rows="5" placeholder="Message" v-model= "email" required></textarea>
+			              <textarea class="form-control" id="message" rows="5" placeholder="Message" v-model= "message" required></textarea>
 			            </div>
 			            <div class="d-flex justify-content-between align-items-center">
 			            	<div class="social-links">
