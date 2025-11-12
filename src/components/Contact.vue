@@ -13,13 +13,13 @@
 			        <div class="col-md-6">
 			          <form class="p-4 border rounded bg-white shadow-sm" @submit.prevent="submitForm">
 			            <div class="mb-3">
-			              <input type="text" class="form-control" id="name" placeholder="First Name M.I. Last Name" required>
+			              <input type="text" class="form-control" id="name" placeholder="First Name M.I. Last Name" v-model="name" required>
 			            </div>
 			            <div class="mb-3">
-			              <input type="email" class="form-control" id="email" placeholder="Email" required>
+			              <input type="email" class="form-control" id="email" placeholder="Email" v-model="email" required>
 			            </div>
 			            <div class="mb-3">
-			              <textarea class="form-control" id="message" rows="5" placeholder="Message" required></textarea>
+			              <textarea class="form-control" id="message" rows="5" placeholder="Message" v-model= "email" required></textarea>
 			            </div>
 			            <div class="d-flex justify-content-between align-items-center">
 			            	<div class="social-links">
@@ -28,7 +28,7 @@
 			            	<a href="https://github.com/login" target="_blank"><img src="/images/github.png"></a>
 			            	</div>
 
-			            <button type="submit" class="btn btn-primary rounded-pill px-4">Submit</button>
+			            <button type="submit" class="btn btn-primary rounded-pill px-4" :disabled="isLoading">{{isLoading ? "Sending..." : "Submit"}}</button>
 			            </div>
 			          </form>
 			        </div>
@@ -37,3 +37,109 @@
 			    </div>
 
 </template>
+
+<script setup>
+    
+    import { ref, onMounted, onBeforeUnmount } from 'vue';
+    import { Notyf } from 'notyf';
+    import 'notyf/notyf.min.css';
+
+    const notyf = new Notyf();
+
+    const WEB3FORMS_ACCESS_KEY = "26f586b0-5e34-4b20-a19b-cabfed3fe6ba";
+
+    const subject = "New message from Portfolio Contact Form";
+
+    const name = ref("");
+    const email = ref("");
+    const message = ref("");
+
+    const isLoading = ref(false);
+
+    const submitForm = async() => {
+
+        if(!recaptchaToken.value){
+            notyf.error("Please verify that you are not a robot.");
+            return;
+        }
+
+        isLoading.value = true;
+
+        try {
+            const response = await fetch("https://api.web3forms.com/submit", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                },
+                body: JSON.stringify({
+                    access_key: WEB3FORMS_ACCESS_KEY,
+                    subject: subject,
+                    name: name.value,
+                    email: email.value,
+                    message: message.value
+                })
+            })
+            const result = await response.json();
+
+            if( result.success){
+                console.log(result);
+                isLoading.value = false;
+                notyf.success("Message Sent!");
+            }
+        } catch(error){
+            console.log(error);
+            isLoading.value = false;
+            notyf.error("Failed to send message")
+        } finally {
+            resetRecaptcha();
+        }
+    }
+
+    const SITE_KEY = '6Ldt7gksAAAAAJHJ06CulIh8_ajOwi0zOyzwOMaX';
+
+    const recaptchaContainer = ref(null);
+    const recaptchaWidgetId = ref(null);
+    const recaptchaToken = ref("");
+
+    function onRecaptchaSuccess(token){
+        recaptchaToken.value = token;
+    }
+
+    function onRecaptchaExpired(){
+        recaptchaToken.value = '';
+    }
+
+    function renderRecaptcha(){
+        if(!window.grecaptcha){
+            console.error("recaptcha not loaded");
+            return;
+        }
+        recaptchaWidgetId.value = window.grecaptcha.render(recaptchaContainer.value, {
+            sitekey: SITE_KEY,
+            size: 'normal',
+            callback: onRecaptchaSuccess,
+            'expired-callback': onRecaptchaExpired
+        });
+    }
+
+    function resetRecaptcha(){
+        if(recaptchaWidgetId.value !== null){
+            window.grecaptcha.reset(recaptchaWidgetId.value);
+            recaptchaToken.value = '';
+        }
+    }
+
+    onMounted(() => {
+        const interval = setInterval(() => {
+            if(window.grecaptcha && window.grecaptcha.render){
+                renderRecaptcha();
+                clearInterval(interval)
+            }
+        }, 100);
+
+        onBeforeUnmount(() => { 
+            clearInterval(interval)
+        })
+    });
+</script>
