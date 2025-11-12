@@ -30,6 +30,8 @@
 
 			            <button type="submit" class="btn btn-primary rounded-pill px-4" :disabled="isLoading">{{isLoading ? "Sending..." : "Submit"}}</button>
 			            </div>
+			            <div class="d-flex justify-content-end mt-2 ">
+ 						<div ref="recaptchaContainer"></div>
 			          </form>
 			        </div>
 
